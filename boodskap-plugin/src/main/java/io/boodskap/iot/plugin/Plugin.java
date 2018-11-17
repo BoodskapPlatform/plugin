@@ -16,7 +16,7 @@ public @interface Plugin {
 	
 	/**
 	 * A unique identifier for this plugin, typically a UUID in string format
-	 * @return
+	 * @return {@link String}
 	 */
 	String id();
 	
@@ -27,13 +27,19 @@ public @interface Plugin {
 	 * 	declare {@link PluginType} annotation and
 	 * 	implement {@link PluginService} interface
 	 * </pre>
-	 * @return
+	 * @return {@link PluginType}
 	 */
 	PluginType type();
 	
 	/**
+	 * Plugin version, semver style versioning is strongly recommended
+	 * @return {@link String}
+	 */
+	String version();
+	
+	/**
 	 * If the plugin is a type of {@link PluginType#CONTEXT} then a unique context-id is required
-	 * @return
+	 * @return {@link String}
 	 */
 	String contextId() default "";
 }
