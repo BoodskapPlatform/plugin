@@ -23,4 +23,5 @@
 			<version>${ignite.version}</version>
 		</dependency>
 	</dependencies>
+
 </project>
