@@ -42,4 +42,10 @@ public @interface Plugin {
 	 * @return {@link String}
 	 */
 	String contextId() default "";
+	
+	/**
+	 * A short description about the plugin
+	 * @return {@link String}
+	 */
+	String desc() default "";
 }
