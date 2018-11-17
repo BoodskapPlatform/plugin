@@ -18,6 +18,11 @@ public class ConfigParam implements Serializable {
 	private String name;
 	
 	/**
+	 * Default value
+	 */
+	private String def;
+	
+	/**
 	 * Parameter type
 	 */
 	private ConfigParamType type;
@@ -70,10 +75,19 @@ public class ConfigParam implements Serializable {
 		this.title = title;
 	}
 
+	public String getDef() {
+		return def;
+	}
+
+	public void setDef(String def) {
+		this.def = def;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((def == null) ? 0 : def.hashCode());
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
@@ -90,6 +104,11 @@ public class ConfigParam implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		ConfigParam other = (ConfigParam) obj;
+		if (def == null) {
+			if (other.def != null)
+				return false;
+		} else if (!def.equals(other.def))
+			return false;
 		if (description == null) {
 			if (other.description != null)
 				return false;
