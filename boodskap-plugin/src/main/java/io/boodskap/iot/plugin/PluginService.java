@@ -13,7 +13,7 @@ public @interface PluginService {
 	
 	/**
 	 * Type of the plugin service
-	 * @return
+	 * @return {@link ServiceType}
 	 */
 	ServiceType type();
 	
@@ -22,7 +22,7 @@ public @interface PluginService {
 	 * <pre>
 	 * Ignored if <code>type</code> is not {@link ServiceType#SCALABLE}
 	 * </pre>
-	 * @return
+	 * @return {@link Integer}
 	 */
 	int min() default 1;
 	
@@ -31,7 +31,7 @@ public @interface PluginService {
 	 * <pre>
 	 * Ignored if <code>type</code> is not {@link ServiceType#SCALABLE}
 	 * </pre>
-	 * @return
+	 * @return {@link Integer}
 	 */
 	int max() default 1;
 }

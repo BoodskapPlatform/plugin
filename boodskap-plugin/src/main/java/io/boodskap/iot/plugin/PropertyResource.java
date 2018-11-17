@@ -20,7 +20,7 @@ public @interface PropertyResource {
 	
 	/**
 	 * Property name/key
-	 * @return <code>String</code>
+	 * @return {@link String}
 	 */
 	String name();
 	
@@ -29,7 +29,7 @@ public @interface PropertyResource {
 	 * <pre>
 	 * Can't be false if plugin type is {@link PluginType#SERVICE}
 	 * </pre>
-	 * @return <code>boolean</code>
+	 * @return {@link String}
 	 */
 	boolean system() default true;
 }

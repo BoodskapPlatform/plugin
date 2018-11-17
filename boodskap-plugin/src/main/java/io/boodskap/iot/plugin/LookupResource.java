@@ -20,7 +20,7 @@ public @interface LookupResource {
 	
 	/**
 	 * Lookup name/key
-	 * @return <code>String</code>
+	 * @return {@link String}
 	 */
 	String name();
 }
