@@ -2,12 +2,37 @@ package io.boodskap.iot.plugin;
 
 import java.io.Serializable;
 
+/**
+ * Plugin configuration parameter
+ * 
+ * @author Jegan Vincent
+ *
+ */
 public class ConfigParam implements Serializable {
 	
 	private static final long serialVersionUID = 3015413596780362259L;
 	
+	/**
+	 * A name of the parameter
+	 */
 	private String name;
+	
+	/**
+	 * Parameter type
+	 */
 	private ConfigParamType type;
+	
+	/**
+	 * A short title to display in the configuration snippet
+	 * <pre>
+	 * If not provided <code>name</code> will be used
+	 * </pre>
+	 */
+	private String title;
+
+	/**
+	 * A help description to show it to the user in tool-tip 
+	 */
 	private String description;
 
 	public ConfigParam() {
@@ -37,12 +62,21 @@ public class ConfigParam implements Serializable {
 		this.description = description;
 	}
 
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((title == null) ? 0 : title.hashCode());
 		result = prime * result + ((type == null) ? 0 : type.hashCode());
 		return result;
 	}
@@ -65,6 +99,11 @@ public class ConfigParam implements Serializable {
 			if (other.name != null)
 				return false;
 		} else if (!name.equals(other.name))
+			return false;
+		if (title == null) {
+			if (other.title != null)
+				return false;
+		} else if (!title.equals(other.title))
 			return false;
 		if (type != other.type)
 			return false;

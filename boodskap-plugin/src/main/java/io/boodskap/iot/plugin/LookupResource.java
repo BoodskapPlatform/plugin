@@ -5,8 +5,22 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+/**
+ * Annotation to access Boodskap system's Lookup table
+ * 
+ * <pre>
+ * Boodskap platform will inject the actual lookup value during runtime if exists
+ * </pre>
+ * @author Jegan Vincent
+ *
+ */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.FIELD})
 public @interface LookupResource {
+	
+	/**
+	 * Lookup name/key
+	 * @return <code>String</code>
+	 */
 	String name();
 }

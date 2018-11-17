@@ -3,11 +3,34 @@ package io.boodskap.iot.plugin;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * Boodskap Plugin Configuration JSON Structure
+ * <pre>
+ * If a plugin needs configuration snippet in the domain settings screen
+ * then the plugin must include a JSON file along with the bundled jar
+ * The name of the file should match the exact path (package) of the plugin implementation
+ * 
+ * Example:
+ * 	If your plugin is 
+ * 		com.company.plugin.ml.FaceDetectPlugin.java
+ * 	Then the config file should be
+ * 		com.company.plugin.ml.FaceDetectPlugin.json
+ * </pre>
+ * @author Jegan Vincent
+ *
+ */
 public class Config implements Serializable {
 	
 	private static final long serialVersionUID = -3836960251237724564L;
 	
+	/**
+	 * Name that will be displayed on the configuration snippet
+	 */
 	private String name;
+	
+	/**
+	 * One or more parameters
+	 */
 	private List<ConfigParam> params;
 
 	public Config() {
