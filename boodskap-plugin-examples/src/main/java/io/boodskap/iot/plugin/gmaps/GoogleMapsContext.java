@@ -12,6 +12,7 @@ import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 
 import io.boodskap.iot.plugin.ConfigResource;
+import io.boodskap.iot.plugin.Invokable;
 import io.boodskap.iot.plugin.JsonUtil;
 import io.boodskap.iot.plugin.Plugin;
 import io.boodskap.iot.plugin.PluginType;
@@ -32,10 +33,13 @@ public class GoogleMapsContext {
 	@PropertyResource(name="google.map.format")
 	private String format = "MAP";
 	
+	/**
+	 * url-"https://maps.googleapis.com/maps/api/geocode/json"
+	 */
 	@ConfigResource
 	private Map<String, Object> config;
-	//url-"https://maps.googleapis.com/maps/api/geocode/json"
 	
+	@Invokable(signature="Object geocode(String address)", help="Geocode an address and return as Map or JSONObject")
 	public Object geocode(String address) throws UnirestException, JSONException, IOException {
 		
 		JsonNode node = Unirest.get((String)config.get("url"))
@@ -48,6 +52,7 @@ public class GoogleMapsContext {
 		
 	}
 	
+	@Invokable(signature="Object geocode(double latitude, double longitude)", help="Geocode a lat/lon and return as Map or JSONObject")
 	public Object geocode(double latitude, double longitude) throws UnirestException, JsonParseException, JsonMappingException, IOException{
 		
 		JsonNode node = Unirest.get((String)config.get("url"))
@@ -60,9 +65,9 @@ public class GoogleMapsContext {
 		
 	}
 	
-	private Object transform(JsonNode value) throws JsonParseException, JsonMappingException, IOException {
+	protected Object transform(JsonNode value) throws JsonParseException, JsonMappingException, IOException {
 		
-		switch(format) {
+		switch(format.toUpperCase()) {
 		case "JSON":
 			return value.getObject();
 		default:
