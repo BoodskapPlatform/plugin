@@ -31,5 +31,5 @@ public @interface PropertyResource {
 	 * </pre>
 	 * @return {@link String}
 	 */
-	boolean system() default true;
+	boolean system() default false;
 }

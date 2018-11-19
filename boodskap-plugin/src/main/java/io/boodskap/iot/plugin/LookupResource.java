@@ -23,4 +23,13 @@ public @interface LookupResource {
 	 * @return {@link String}
 	 */
 	String name();
+
+	/**
+	 * False if the lookup is Domain's value
+	 * <pre>
+	 * Can't be false if plugin type is {@link PluginType#SERVICE}
+	 * </pre>
+	 * @return {@link String}
+	 */
+	boolean system() default false;
 }
