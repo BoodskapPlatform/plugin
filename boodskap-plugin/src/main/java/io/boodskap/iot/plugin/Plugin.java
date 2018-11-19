@@ -48,4 +48,10 @@ public @interface Plugin {
 	 * @return {@link String}
 	 */
 	String desc() default "";
+	
+	/**
+	 * Author name/email
+	 * @return {@link String}
+	 */
+	String author() default "";
 }
