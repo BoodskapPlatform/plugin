@@ -39,6 +39,13 @@ public class GoogleMapsContext {
 	@ConfigResource
 	private Map<String, Object> config;
 	
+	
+	@Invokable(signature="GoogleMapsContext apiKey(String apiKey)", help="Override API-KEY in domain settings")
+	public GoogleMapsContext apiKey(String apiKey) {
+		this.apiKey = apiKey;
+		return this;
+	}
+	
 	@Invokable(signature="Object geocode(String address)", help="Geocode an address and return as Map or JSONObject")
 	public Object geocode(String address) throws UnirestException, JSONException, IOException {
 		
