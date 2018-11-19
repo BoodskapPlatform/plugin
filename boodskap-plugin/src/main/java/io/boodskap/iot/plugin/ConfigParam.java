@@ -129,4 +129,10 @@ public class ConfigParam implements Serializable {
 		return true;
 	}
 
+	@Override
+	public String toString() {
+		return "ConfigParam [name=" + name + ", def=" + def + ", type=" + type + ", title=" + title + ", description="
+				+ description + "]";
+	}
+
 }

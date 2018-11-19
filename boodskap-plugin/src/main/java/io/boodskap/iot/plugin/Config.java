@@ -83,4 +83,9 @@ public class Config implements Serializable {
 		return true;
 	}
 
+	@Override
+	public String toString() {
+		return "Config [name=" + name + ", params=" + params + "]";
+	}
+
 }
