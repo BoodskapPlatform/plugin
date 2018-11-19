@@ -11,9 +11,11 @@ import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 
+import io.boodskap.iot.AbstractLogger;
 import io.boodskap.iot.plugin.ConfigResource;
 import io.boodskap.iot.plugin.Invokable;
 import io.boodskap.iot.plugin.JsonUtil;
+import io.boodskap.iot.plugin.LoggerResource;
 import io.boodskap.iot.plugin.Plugin;
 import io.boodskap.iot.plugin.PluginType;
 import io.boodskap.iot.plugin.PropertyResource;
@@ -26,6 +28,9 @@ import io.boodskap.iot.plugin.PropertyResource;
 		desc="A simple tool to interact with Google Maps API through rules engine"
 )
 public class GoogleMapsContext {
+	
+	@LoggerResource
+	private AbstractLogger LOG;
 	
 	@PropertyResource(name="google.map.key")
 	private String apiKey;
@@ -46,10 +51,26 @@ public class GoogleMapsContext {
 		return this;
 	}
 	
+	@Invokable(signature="GoogleMapsContext format(String format)", help="Output format [JSON | MAP]")
+	public GoogleMapsContext format(String format) {
+		switch(format.toUpperCase()) {
+		case "JSON":
+		case "MAP":
+			break;
+		default:
+			throw new IllegalArgumentException("Format has to be one of [JSON | MAP]");
+		}
+		this.format = format;
+		return this;
+	}
+	
 	@Invokable(signature="Object geocode(String address)", help="Geocode an address and return as Map or JSONObject")
 	public Object geocode(String address) throws UnirestException, JSONException, IOException {
 		
-		JsonNode node = Unirest.get((String)config.get("url"))
+		String url = (String)config.get("url");
+		LOG.debug("api-key:%s, format:%s, url:%s", apiKey, format, url);
+		
+		JsonNode node = Unirest.get(url)
 		.queryString("key", apiKey)
 		.queryString("address", address)
 		.asJson().getBody()
@@ -62,7 +83,10 @@ public class GoogleMapsContext {
 	@Invokable(signature="Object geocode(double latitude, double longitude)", help="Geocode a lat/lon and return as Map or JSONObject")
 	public Object geocode(double latitude, double longitude) throws UnirestException, JsonParseException, JsonMappingException, IOException{
 		
-		JsonNode node = Unirest.get((String)config.get("url"))
+		String url = (String)config.get("url");
+		LOG.debug("api-key:%s, format:%s, url:%s", apiKey, format, url);
+		
+		JsonNode node = Unirest.get(url)
 		.queryString("key", apiKey)
 		.queryString("latlng", String.format("%s,%s", latitude, longitude))
 		.asJson().getBody()
