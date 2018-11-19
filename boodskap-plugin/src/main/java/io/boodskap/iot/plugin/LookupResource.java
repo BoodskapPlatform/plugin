@@ -5,6 +5,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import io.boodskap.iot.DataType;
+
 /**
  * Annotation to access Boodskap system's Lookup table
  * 
@@ -23,6 +25,12 @@ public @interface LookupResource {
 	 * @return {@link String}
 	 */
 	String name();
+	
+	/**
+	 * Data Type of the lookup value
+	 * @return {@link DataType}
+	 */
+	DataType type();
 
 	/**
 	 * False if the lookup is Domain's value
