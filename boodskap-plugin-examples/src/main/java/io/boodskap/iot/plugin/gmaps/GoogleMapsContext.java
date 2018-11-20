@@ -51,14 +51,15 @@ public class GoogleMapsContext {
 		return this;
 	}
 	
-	@Invokable(signature="GoogleMapsContext format(String format)", help="Output format [JSON | MAP]")
+	@Invokable(signature="GoogleMapsContext format(String format)", help="Output format [JSON | MAP | TEXT]")
 	public GoogleMapsContext format(String format) {
 		switch(format.toUpperCase()) {
 		case "JSON":
 		case "MAP":
+		case "TEXT":
 			break;
 		default:
-			throw new IllegalArgumentException("Format has to be one of [JSON | MAP]");
+			throw new IllegalArgumentException("Format has to be one of [JSON | MAP | TEXT]");
 		}
 		this.format = format;
 		return this;
@@ -101,6 +102,8 @@ public class GoogleMapsContext {
 		switch(format.toUpperCase()) {
 		case "JSON":
 			return value.getObject();
+		case "TEXT":
+			return value.getObject().toString();
 		default:
 		case "MAP":
 			return JsonUtil.jsonToMap(value.getObject().toString());
