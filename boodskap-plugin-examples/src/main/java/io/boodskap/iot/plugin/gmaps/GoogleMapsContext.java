@@ -1,6 +1,7 @@
 package io.boodskap.iot.plugin.gmaps;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.json.JSONException;
@@ -23,7 +24,7 @@ import io.boodskap.iot.plugin.PropertyResource;
 @Plugin(
 		type=PluginType.CONTEXT, 
 		id="4ecfd6f6-ea7b-11e8-9f32-f2801f1b9fd1", 
-		version="1.0.1",
+		version="1.0.2",
 		contextId="gmaps",
 		desc="A simple tool to interact with Google Maps API through rules engine"
 )
@@ -38,12 +39,12 @@ public class GoogleMapsContext {
 	@PropertyResource(name="google.map.format")
 	private String format = "MAP";
 	
-	/**
-	 * url-"https://maps.googleapis.com/maps/api/geocode/json"
-	 */
 	@ConfigResource
-	private Map<String, Object> config;
+	private Map<String, Object> config = new HashMap<>();
 	
+	public GoogleMapsContext() {
+		config.put("url", "https://maps.googleapis.com/maps/api/geocode/json");
+	}
 	
 	@Invokable(signature="GoogleMapsContext apiKey(String apiKey)", help="Override API-KEY in domain settings")
 	public GoogleMapsContext apiKey(String apiKey) {
