@@ -24,16 +24,17 @@ import io.boodskap.iot.plugin.PropertyResource;
 @Plugin(
 		type=PluginType.CONTEXT, 
 		id="4ecfd6f6-ea7b-11e8-9f32-f2801f1b9fd1", 
-		version="1.0.2",
+		version="1.0.3",
 		contextId="gmaps",
-		desc="A simple tool to interact with Google Maps API through rules engine"
+		desc="A simple tool to interact with Google Maps API through rules engine",
+		author="Jegan Vincent"
 )
 public class GoogleMapsContext {
 	
 	@LoggerResource
 	private AbstractLogger LOG;
 	
-	@PropertyResource(name="google.map.key")
+	@PropertyResource(name="google.map.api_key")
 	private String apiKey;
 	
 	@PropertyResource(name="google.map.format")
