@@ -23,7 +23,7 @@ import io.boodskap.iot.plugin.PropertyResource;
 @Plugin(
 		type=PluginType.CONTEXT, 
 		id="4ecfd6f6-ea7b-11e8-9f32-f2801f1b9fd1", 
-		version="1.0.0",
+		version="1.0.1",
 		contextId="gmaps",
 		desc="A simple tool to interact with Google Maps API through rules engine"
 )
