@@ -40,4 +40,10 @@ public @interface LookupResource {
 	 * @return {@link String}
 	 */
 	boolean system() default false;
+	
+	/**
+	 * Default lookup value if not configured
+	 * @return {@link String}
+	 */
+	String def() default "";
 }

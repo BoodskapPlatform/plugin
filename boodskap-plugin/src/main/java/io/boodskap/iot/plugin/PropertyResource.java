@@ -32,4 +32,10 @@ public @interface PropertyResource {
 	 * @return {@link String}
 	 */
 	boolean system() default false;
+	
+	/**
+	 * Default property value if not configured
+	 * @return {@link String}
+	 */
+	String def() default "";
 }
