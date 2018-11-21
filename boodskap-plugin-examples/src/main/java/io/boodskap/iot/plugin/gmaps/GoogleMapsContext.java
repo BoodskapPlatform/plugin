@@ -24,7 +24,7 @@ import io.boodskap.iot.plugin.PropertyResource;
 @Plugin(
 		type=PluginType.CONTEXT, 
 		id="4ecfd6f6-ea7b-11e8-9f32-f2801f1b9fd1", 
-		version="1.0.3",
+		version="1.0.4",
 		contextId="gmaps",
 		desc="A simple tool to interact with Google Maps API through rules engine",
 		author="Jegan Vincent"
@@ -34,11 +34,11 @@ public class GoogleMapsContext {
 	@LoggerResource
 	private AbstractLogger LOG;
 	
-	@PropertyResource(name="google.map.api_key")
+	@PropertyResource(name="google.maps.api_key")
 	private String apiKey;
 	
-	@PropertyResource(name="google.map.format")
-	private String format = "MAP";
+	@PropertyResource(name="google.maps.output_format", def="MAP")
+	private String output = "MAP";
 	
 	@ConfigResource
 	private Map<String, Object> config = new HashMap<>();
@@ -53,17 +53,9 @@ public class GoogleMapsContext {
 		return this;
 	}
 	
-	@Invokable(signature="GoogleMapsContext format(String format)", help="Output format [JSON | MAP | TEXT]")
-	public GoogleMapsContext format(String format) {
-		switch(format.toUpperCase()) {
-		case "JSON":
-		case "MAP":
-		case "TEXT":
-			break;
-		default:
-			throw new IllegalArgumentException("Format has to be one of [JSON | MAP | TEXT]");
-		}
-		this.format = format;
+	@Invokable(signature="GoogleMapsContext output(String format)", help="Output format [JSON | MAP | TEXT]")
+	public GoogleMapsContext output(String format) {
+		this.output = format;
 		return this;
 	}
 	
@@ -71,7 +63,7 @@ public class GoogleMapsContext {
 	public Object geocode(String address) throws UnirestException, JSONException, IOException {
 		
 		String url = (String)config.get("url");
-		LOG.debug("api-key:%s, format:%s, url:%s", apiKey, format, url);
+		LOG.debug("api-key:%s, format:%s, url:%s", apiKey, output, url);
 		
 		JsonNode node = Unirest.get(url)
 		.queryString("key", apiKey)
@@ -87,7 +79,7 @@ public class GoogleMapsContext {
 	public Object geocode(double latitude, double longitude) throws UnirestException, JsonParseException, JsonMappingException, IOException{
 		
 		String url = (String)config.get("url");
-		LOG.debug("api-key:%s, format:%s, url:%s", apiKey, format, url);
+		LOG.debug("api-key:%s, format:%s, url:%s", apiKey, output, url);
 		
 		JsonNode node = Unirest.get(url)
 		.queryString("key", apiKey)
@@ -101,7 +93,7 @@ public class GoogleMapsContext {
 	
 	protected Object transform(JsonNode value) throws JsonParseException, JsonMappingException, IOException {
 		
-		switch(format.toUpperCase()) {
+		switch(output.toUpperCase()) {
 		case "JSON":
 			return value.getObject();
 		case "TEXT":
