@@ -1,0 +1,12 @@
+{
+  "name": "Google Maps Plugin Config",
+  "params": [
+    {
+      "name": "url",
+      "def": "https://maps.googleapis.com/maps/api/geocode/json",
+      "type": "STRING",
+      "title": "URL",
+      "description": "API Url"
+    }
+  ]
+}
