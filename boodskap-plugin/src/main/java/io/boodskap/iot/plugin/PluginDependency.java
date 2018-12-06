@@ -18,6 +18,7 @@ public class PluginDependency implements Serializable {
 	private static final long serialVersionUID = -8501315489317129479L;
 	
 	private List<Dependency> deps = new ArrayList<>();
+	private List<String> exclusions = new ArrayList<>();
 	
 	public PluginDependency() {
 	}
@@ -30,10 +31,26 @@ public class PluginDependency implements Serializable {
 		return deps;
 	}
 
+	public void setDeps(List<Dependency> deps) {
+		this.deps = deps;
+	}
+
 	public void add(Dependency... deps) {
 		this.deps.addAll(Arrays.asList(deps));
 	}
 	
+	public List<String> getExclusions() {
+		return exclusions;
+	}
+
+	public void setExclusions(List<String> exclusions) {
+		this.exclusions = exclusions;
+	}
+	
+	public void add(String... exclusions) {
+		this.exclusions.addAll(Arrays.asList(exclusions));
+	}
+
 	/**
 	 * Method to convert to JSON String
 	 * @return {@link String} in JSON format or null on failure
@@ -58,6 +75,7 @@ public class PluginDependency implements Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((deps == null) ? 0 : deps.hashCode());
+		result = prime * result + ((exclusions == null) ? 0 : exclusions.hashCode());
 		return result;
 	}
 
@@ -75,9 +93,14 @@ public class PluginDependency implements Serializable {
 				return false;
 		} else if (!deps.equals(other.deps))
 			return false;
+		if (exclusions == null) {
+			if (other.exclusions != null)
+				return false;
+		} else if (!exclusions.equals(other.exclusions))
+			return false;
 		return true;
 	}
-	
+
 	public static class Builder{
 		
 		private final PluginDependency deps = new PluginDependency();
@@ -92,6 +115,11 @@ public class PluginDependency implements Serializable {
 		
 		public Builder add(Dependency dep) {
 			this.deps.add(dep);
+			return this;
+		}
+		
+		public Builder add(String... exclusions) {
+			this.deps.add(exclusions);
 			return this;
 		}
 		
