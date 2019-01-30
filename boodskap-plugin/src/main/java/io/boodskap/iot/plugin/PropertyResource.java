@@ -5,6 +5,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import io.boodskap.iot.DataFormat;
+
 /**
  * Annotation to access Boodskap system's Property table
  * 
@@ -38,4 +40,10 @@ public @interface PropertyResource {
 	 * @return {@link String}
 	 */
 	String def() default "";
+	
+	/**
+	 * Default data format
+	 * @return {@link DataFormat}
+	 */
+	DataFormat format() default DataFormat.AS_IS;
 }
