@@ -1,10 +1,8 @@
 package io.boodskap.iot.plugin;
 
-import org.apache.ignite.IgniteCache;
-import org.apache.ignite.IgniteException;
-import org.apache.ignite.IgniteQueue;
-import org.apache.ignite.configuration.CollectionConfiguration;
-import org.jetbrains.annotations.Nullable;
+import java.util.concurrent.BlockingQueue;
+
+import javax.cache.Cache;
 
 /**
  * An injectable interface, plugin can interact with Boodskap system
@@ -20,7 +18,7 @@ public interface DomainSettings{
 	
 	public String getApiUrl();
 	
-	public <K, V> IgniteCache<K, V> getCache(String cacheName) throws IgniteException;
+	public <K, V> Cache<K, V> getCache(String cacheName) throws Exception;
 	
-	public <T> IgniteQueue<T> getQueue(String name, int cap, @Nullable CollectionConfiguration cfg) throws IgniteException;
+	public <T> BlockingQueue<T> getQueue(String name) throws Exception;
 }
