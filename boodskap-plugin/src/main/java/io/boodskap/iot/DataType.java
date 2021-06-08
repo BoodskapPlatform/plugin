@@ -14,6 +14,8 @@ public enum DataType {
 	UUID,
 	BLOB,
 	JSON,
+	NESTED,
+	OBJECT,
 	_boolean,
 	_byte,
 	_char,
